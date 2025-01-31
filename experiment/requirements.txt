@@ -19,3 +19,4 @@ transformers==4.46.0
 wandb==0.16.3
 python-levenshtein==0.23.0
 sentencepiece==0.2.0
+sentence-transformers==3.0.1

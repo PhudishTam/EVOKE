@@ -10,4 +10,8 @@
 
   # Hyperparameters
   HPARAMS_DIR: "hparams"
+  
+  # Remote URLs
+  REMOTE_ROOT_URL: "https://memit.baulab.info"
+
 
