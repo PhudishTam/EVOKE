@@ -1,0 +1,13 @@
+---
+  # Result files
+  RESULTS_DIR: "results"
+
+  # Data files
+  DATA_DIR: "data"
+  STATS_DIR: "data/stats"
+  EMBEDDING_DIR: "data/embedding"
+  KV_DIR: "kvcache/rewriting-knowledge/kvs"
+
+  # Hyperparameters
+  HPARAMS_DIR: "hparams"
+
