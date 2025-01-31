@@ -45,7 +45,7 @@ For ROME and MEMIT, we use precomputed Wikipedia stats on GPT-2 XL and GPT-J fro
 If you find this work helpful for your research, please kindly cite it.
 
 ```text
-@misc{zhang2024uncoveringoverfittinglargelanguage,
+@misc{zhang2024uncovering,
       title={Uncovering Overfitting in Large Language Model Editing}, 
       author={Mengqi Zhang and Xiaotian Ye and Qiang Liu and Pengjie Ren and Shu Wu and Zhumin Chen},
       year={2024},
