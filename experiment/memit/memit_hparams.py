@@ -33,3 +33,5 @@ class MEMITHyperParams(HyperParams):
     mom2_dataset: str
     mom2_n_samples: int
     mom2_dtype: str
+
+    prob_cutoff: float

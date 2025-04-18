@@ -3,8 +3,8 @@
   RESULTS_DIR: "results"
 
   # Data files
-  DATA_DIR: "data"
-  STATS_DIR: "data/stats"
+  DATA_DIR: "/data/phudish_p/EVOKE/data"
+  STATS_DIR: "/data/phudish_p/regularized-model-editing/data/stats"
   EMBEDDING_DIR: "data/embedding"
   KV_DIR: "kvcache/rewriting-knowledge/kvs"
 
