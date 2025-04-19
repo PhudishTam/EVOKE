@@ -266,20 +266,16 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--model_name",
-        #default="/data/akshat/models/Llama-2-7b-hf",
-        #default="/data/akshat/models/Meta-Llama-3-8B",
-        #default = "/data/akshat/models/gpt2-xl",
-        default = "/data/akshat/models/gpt-j-6b",
+        #default = "openai-community/gpt2-xl",
+        default = "/home/azureuser/gpt-j-6b",
         help="Model to edit.",
         required=False,
     )
     parser.add_argument(
         "--hparams_fname",
         type=str,
-        #default="llama2-7b.json",
         #default="gpt2-xl.json",
         default="gpt-j-6b.json",
-        #default="llama3-8b.json",
         help="Name of hyperparameters file, located in the hparams/<alg_name> folder.",
         required=False,
     )
