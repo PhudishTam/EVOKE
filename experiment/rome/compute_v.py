@@ -107,6 +107,7 @@ def compute_v(
     nethook.set_requires_grad(False, model)
 
     # Execute optimization
+    correct_counter = 0 
     for it in range(hparams.v_num_grad_steps):
         opt.zero_grad()
 
@@ -157,11 +158,34 @@ def compute_v(
         )
         # weight_decay = hparams.v_weight_decay * torch.norm(delta) ** 2
         loss = nll_loss + kl_loss + weight_decay
+        ##### CODE to cut off calculation as soon as the target reaches top prediction
+        prompt_prob = log_probs[1:,:, :]    #get only probalities of prompts, removing KL divergence prompt
+        prompt_targets = rewriting_targets[1:,:]    #get the targets for the same prompts
+
+        prompt_mask = prompt_targets != -100    #this identifies the index of the target prompt
+
+        prompt_index, target_index = torch.nonzero(prompt_mask, as_tuple=True)
+        #prompt index just generates indexes 0,1,2,3,4 to index each prompt in prompt_prob
+        #target index generates the vocabulary index in the sentence where are target word lies
+
+        target_token_index = prompt_targets[prompt_index, target_index]    #retrieve the target token vocab index 
+        current_top_rank_index = torch.argmax(prompt_prob[prompt_index, target_index], dim = -1)    #generates vocab index of number 1 ranking token
+
+        num_correct = torch.sum(target_token_index == current_top_rank_index).item()   #number of prompts for which we get correct target
+
         print(
             f"loss {np.round(loss.item(), 3)} = {np.round(nll_loss.item(), 3)} + {np.round(kl_loss.item(), 3)} + {np.round(weight_decay.item(), 3)} "
             f"avg prob of [{request['target_new']['str']}] "
             f"{torch.exp(-nll_loss_each).mean().item()}"
+            f"Num Correct {num_correct}"
         )
+        
+        if hparams.prob_cutoff < 0 and num_correct == 5:    # if hparams.prob_cutoff is negative, it acts as a counter to number of steps - 1 to do after target reaches rank = 1
+            correct_counter += 1
+            if correct_counter == abs(hparams.prob_cutoff):
+                break
+        if hparams.prob_cutoff > 0 and torch.exp(-nll_loss_each).mean().item() > hparams.prob_cutoff:
+            break
         if loss < 5e-2:
             break
 

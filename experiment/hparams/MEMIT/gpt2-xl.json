@@ -25,5 +25,5 @@
     "mom2_dataset": "wikipedia",
     "mom2_n_samples": 100000,
     "mom2_dtype": "float32",
-    "prob_cutoff": -1
+    "prob_cutoff": -3
 }
